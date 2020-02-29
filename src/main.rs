@@ -1,4 +1,5 @@
-use yew::{ html, Callback, ClickEvent, Component, ComponentLink, Html, ShouldRender};
+use yew::{ html, Callback, ClickEvent, Component, ComponentLink, Html, ShouldRender };
+mod todo_item;
 
 struct App {
     clicked: bool,
@@ -33,7 +34,10 @@ impl Component for App {
         let button_text = if self.clicked { "Clicked" } else { "Click me" };
 
         html! {
-            <button onclick=&self.onclick>{ button_text }</button>
+            <div>
+                <todo_item::TodoItem text=String::from("test") />
+                <button onclick=&self.onclick>{ button_text }</button>
+            </div>
         }
     }
 }
