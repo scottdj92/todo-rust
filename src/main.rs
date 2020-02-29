@@ -1,9 +1,9 @@
-use yew::{ html, Callback, ClickEvent, Component, ComponentLink, Html, ShouldRender };
+use yew::prelude::*;
 mod todo_item;
+mod todo_count;
 
 struct App {
     clicked: bool,
-    onclick: Callback<ClickEvent>
 }
 
 enum Msg {
@@ -17,7 +17,6 @@ impl Component for App {
     fn create(_: Self::Properties, link: ComponentLink<Self>) -> Self {
         App {
             clicked: false,
-            onclick: link.callback(|_| Msg::Click),
         }
     }
 
@@ -31,12 +30,10 @@ impl Component for App {
     }
 
     fn view(&self) -> Html {
-        let button_text = if self.clicked { "Clicked" } else { "Click me" };
-
         html! {
             <div>
                 <todo_item::TodoItem text=String::from("test") />
-                <button onclick=&self.onclick>{ button_text }</button>
+                <todo_count::TodoCount />
             </div>
         }
     }
