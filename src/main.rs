@@ -31,10 +31,10 @@ impl Component for App {
 
     fn view(&self) -> Html {
         html! {
-            <div>
+            <main class="main">
                 <todo_item::TodoItem text=String::from("test") />
                 <todo_count::TodoCount />
-            </div>
+            </main>
         }
     }
 }

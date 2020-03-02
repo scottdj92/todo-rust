@@ -38,11 +38,19 @@ impl Component for TodoItem {
     }
 
     fn view(&self) -> Html {
-        let item_text = if self.completed { "completed" } else { "not done yet" };
+        let item = |item: u8| -> Html {
+            html! {
+                <div>
+                    { item.to_string() }
+                    <button onclick=&self.link.callback(|_| Msg::Click)>{ "complete this" }</button>
+                </div>
+            }
+        };
         html! {
             <div>
-                { &self.text }
-                <button onclick=&self.link.callback(|_| Msg::Click)>{ item_text }</button>
+                {
+                    for(1..4).map(item)
+                 }
             </div>
         }
     }

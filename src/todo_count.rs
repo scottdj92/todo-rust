@@ -6,7 +6,8 @@ pub struct TodoCount {
 }
 
 pub enum Msg {
-    Click
+    Increment,
+    Decrement
 }
 
 impl Component for TodoCount {
@@ -22,7 +23,14 @@ impl Component for TodoCount {
 
     fn update(&mut self, msg: Self::Message) -> ShouldRender {
         match msg {
-            Msg::Click => self.nb_todos = self.nb_todos + 1
+            Msg::Increment => self.nb_todos = self.nb_todos + 1,
+            Msg::Decrement => {
+                if self.nb_todos != 0 {
+                    self.nb_todos = self.nb_todos - 1
+                } else {
+                    self.nb_todos = 0
+                }
+            },
         }
         true
     }
@@ -31,7 +39,8 @@ impl Component for TodoCount {
         html! {
             <div>
                 { &self.nb_todos.to_string() }
-                <button onclick=&self.link.callback(|_| Msg::Click)>{ "increment" }</button>
+                <button onclick=&self.link.callback(|_| Msg::Increment)>{ "increment" }</button>
+                <button onclick=&self.link.callback(|_| Msg::Decrement)>{ "decrement" }</button>
             </div>
         }
     }
